@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./paging.css">
+</head>
+
+<body>
+
+    <div id="pageToolbar"></div>
+</body>
+<script src="./jquery-1.11.2.js"></script>
+<script src="./paging.js"></script>
+<script>
+    //jquery插件的写法
+    $('#pageToolbar').Paging({
+        pagesize: 10,
+        count: 85,
+        toolbar: true,
+        hash: true,
+        changePagesize: function (ps) {
+            alert(ps)
+        },
+        callback: function (a) {
+            console.log(a)
+        }
+    });
+</script>
+
+</html>

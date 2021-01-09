@@ -1,0 +1,32 @@
+js 的数据类型   8中
+
+	undefined  
+	number
+	object
+	string	
+	null、
+	boolean   常见的六种
+	
+	后面新出的3中
+	bigint  ES2020 引入 第八个 数据类型 BigInt（大整数），来解决这个问题，这是 ECMAScript 的第八种数据类型。BigInt 只用来表示整数，没有位数的限制，任何位数的整数都可以精确表示。
+	 
+	Symbol 	ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，
+	前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+
+
+		Set Map es6 引入的新数据结构
+	
+
+	typeof  返回的值有   8中
+			number 
+			object	
+			boolean  
+			string   
+			undefined 
+			bigint
+			function 
+			symbol
+			
+
+
+	

@@ -1,0 +1,108 @@
+/* 在綫發貨 */
+/* 在线发货 */
+.zaixianfahuo{
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #f0eff5;
+    box-sizing: border-box;
+}
+.zaixianfahuo div{
+    height: 80%;
+    line-height: 40px;
+    padding: 0 25px;
+    font-weight: 600;
+    background-color:#1c6bea;
+    border-radius: 10px;
+   margin-top: 5px;
+}
+.zaixianfahuo div a{
+    display:inline-block;
+    color: white;
+}
+
+.zaixianfahuo div:nth-child(2){
+    background-color: #ffb861;
+}
+.zaixianfahuo div span{
+    font-size: 20px;
+}
+
+.gotop{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    background-color: #8c8c8c;
+    opacity: 0.8;
+    color: white;
+    transform: rotate(-90deg) ;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+
+<script>
+    var gotop = document.querySelector(".gotop")
+window.onmousewheel =function(){
+    if(window.scrollY>100){
+        gotop.style.display = "block"
+    }else{
+        gotop.style.display = "none"
+    }
+    return
+}
+
+gotop.onclick = function(){
+    let tmri = setInterval(() => {
+    window.scrollBy(0,-8)
+    console.log(1);
+    if(!window.scrollY){
+        clearInterval(tmri)
+        gotop.style.display = "none"
+    }
+}, 1);
+}
+</script>
+
+
+
+
+
+   
+
+
+     <!-- 在綫發貨 -->
+ <div class="zaixianfahuo">
+    <div><a href="tel:11" >联系我们</a> </div>
+    <div><a href="./fauo.html" target="_block" >在线发货</a> </div>
+</div>
+<div class="gotop" style="display: none;">》</div>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

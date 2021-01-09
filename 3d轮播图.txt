@@ -1,0 +1,210 @@
+<div class="carousel wrapper">
+    <ul>
+        <li class="current-left">
+            <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3280683688,3836446722&fm=26&gp=0.jpg" alt="">
+        </li>
+        <li class="current">
+            <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3532292620,818439547&fm=26&gp=0.jpg" alt="">
+        </li>
+        <li class="current-right">
+            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=695667114,3084127743&fm=26&gp=0.jpg" alt="">
+        </li>
+        <li class="">
+            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=200747681,2291537541&fm=26&gp=0.jpg" alt="">
+        </li>
+        <li>
+            <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3862431153,3618340174&fm=26&gp=0.jpg" alt="">
+        </li>
+        <li>
+            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1679893386,393092798&fm=15&gp=0.jpg" alt="">
+        </li>
+    </ul>
+
+    <div class="indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class=""></span>
+        <span class=""></span>
+    </div>    
+    <div class="bg">
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.wrapper{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* 图片的样式 */
+.carousel {
+    height: 375px;
+    position: relative;
+    cursor: pointer;
+}
+
+.carousel ul {
+    height: 100%;
+    position: relative;
+}
+.carousel ul li{
+    width: 750px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transform: translateX(225px) scale(0.8);
+    transition: 0.5s;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+}
+.carousel ul li.current{
+    transform: translateX(225px) scale(0.9);
+    z-index: 3;
+    box-shadow: 0px 0px 7px 2px #7e7a7a;
+    opacity: 1;
+}
+.carousel ul li.current-left{
+    transform: translateX(0) scale(0.8);
+    transform-origin: left center;
+    z-index: 2;
+    opacity: 0.9;
+}
+.carousel ul li.current-right{
+    transform: translateX(600px) scale(0.8);
+    transform-origin: left center;
+    z-index: 2;
+    opacity: 0.9;
+}
+.carousel ul li img{
+    width: 100%;
+    height: 100%;
+}
+
+/* 背景的样式 */
+.bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1679893386,393092798&fm=15&gp=0.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    transition:  0.5s;
+}
+/* 指示器 indicator */
+.indicator{
+    position: relative;
+    bottom: 20px;
+    /* display: flex; */
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+}
+.indicator span{
+    display: inline-block;
+    width: 30px;
+    height: 10px;
+    background-color: red;
+        cursor: pointer;
+}
+.indicator span.action{
+    background-color: black;
+}
+
+
+
+
+
+
+
+(function () {
+
+    var lis = document.querySelectorAll(".carousel li")
+    var carousel = document.querySelector(".carousel")
+    var indicator = document.querySelectorAll(".carousel .indicator span")
+    var bg = document.querySelector(".carousel .bg")
+
+    function action(index) {
+        var currentLeft = index - 1;
+        currentLeft = currentLeft < 0 ? lis.length - 1 : currentLeft;
+        var currentRight = index + 1;
+        currentRight = currentRight == lis.length ? 0 : currentRight;
+        surrent = index
+
+        lis.forEach(function (item) {
+            item.classList.remove("current-left")
+            item.classList.remove("current")
+            item.classList.remove("current-right")
+        })
+
+
+        lis[currentLeft].classList.add("current-left")
+        lis[index].classList.add("current")
+        lis[currentRight].classList.add("current-right")
+
+        bg.style.backgroundImage = `url(${lis[index].children[0].src})`
+
+
+        indicator[currentLeft].classList.remove("action")
+        indicator[index].classList.add("action")
+
+    }
+
+    action(0)
+    var current = 0
+    var timer = setInterval(() => {
+        current = ++current % lis.length
+        action(current)
+    }, 1000);
+
+    for (let index = 0; index < indicator.length; index++) {
+        indicator[index].onclick = function () {
+         document.querySelector(".carousel .indicator span.action").classList.remove("action")
+            current = index
+            action(index)
+        }
+    }
+
+
+    carousel.onmouseenter = function () {
+        clearInterval(timer)
+    }
+    carousel.onmouseleave = function () {
+        clearInterval(timer)
+        timer = setInterval(() => {
+            action(current)
+            current = ++current % lis.length
+        }, 1000);
+    }
+
+})()
+
+
+
+
+
+

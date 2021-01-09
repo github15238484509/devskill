@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* * 轮播图 */
+        .wrapper{
+            width: 1200px;
+            margin: 0 auto;
+        }
+         .carousel {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .carousel ul {
+            position: absolute;
+            height: 100%;
+            font-size: 0;
+        }
+
+        .carousel ul li {
+            height: 100%;
+            display: inline-block;
+        }
+
+        .carousel ul li img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel .dian {
+            position: absolute;
+            display: flex;
+            width: 100px;
+            bottom: 20px;
+            justify-content: space-between;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        .carousel .dian span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 2;
+            color: white;
+            border: 1px solid #483939;
+        }
+
+        .carousel .dian span.action {
+            background-color: white;
+        }
+
+        .carousel .next {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel .next span {
+            font-weight: 600;
+            width: 30px;
+            height: 30px;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            background-color: black;
+            opacity: 0.5;
+            transition: all 0.5s;
+        }
+
+        .carousel .next span:hover {
+            opacity: 0.8;
+        }
+
+        .carousel .next span:nth-child(1) {
+            transform: translateX(-100%);
+        }
+
+        .carousel .next span:nth-child(2) {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel wrapper">
+        <ul style=" transition: all 0.5s; left: 0;">
+            <li><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2005235653,1742582269&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1898164961,3787365000&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2005235653,1742582269&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2005235653,1742582269&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1943832461,585451565&fm=26&gp=0.jpg"
+                    alt=""></li>
+        </ul>
+        <div class="dian">
+            <span class="action"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="next">
+            <span>
+                <</span> <span>>
+            </span>
+        </div>
+    </div>
+</body>
+<script>
+    function craousel() {
+        let carousel = document.querySelector(".carousel")
+        let dian = carousel.querySelector(".dian")
+        let next = carousel.querySelector(".next")
+        let ul = carousel.querySelector("ul")
+        let li = ul.children[0].cloneNode(true)
+        ul.appendChild(li)
+        ul.style.width = ul.children.length * 100 + "%";
+        for (let i = 0; i < ul.children.length; i++) {
+            ul.children[i].style.width = 100 / ul.children.length + "%"
+        }
+        let num = 0
+
+        function mover() {
+            num = ++num % ul.children.length
+            if (num == 0) {
+                ++num
+            }
+            if (num < 0) {
+                num = 5
+            }
+            moverul(num)
+            removedian(num)
+        }
+
+        function yichuguodu() {
+            this.style.transition = "none"
+            num = 0
+            ul.style.left = -num * ul.children[0].offsetWidth + "px"
+            return
+        }
+
+        function moverul(num) {
+            ul.removeEventListener("transitionend", yichuguodu)
+            ul.style.transition = "all 0.5s"
+            if (num == (ul.children.length - 1)) {
+                ul.addEventListener("transitionend", yichuguodu)
+            }
+            ul.style.left = -num * ul.children[0].offsetWidth + "px"
+
+        }
+        let ln = 0
+
+        function removedian(num) {
+            let cn = num % (ul.children.length - 1)
+            dian.children[ln].className = ""
+            dian.children[cn].className = "action"
+            ln = cn
+
+        }
+        let timer = null
+        timer = setInterval(mover, 2000)
+
+        carousel.onmouseenter = function () {
+            clearInterval(timer)
+            next.children[0].style.transform = "translateX(0%)"
+            next.children[1].style.transform = "translateX(0%)"
+
+        }
+        carousel.onmouseleave = function () {
+            clearInterval(timer)
+            timer = setInterval(mover, 2000)
+            next.children[0].style.transform = "translateX(-100%)"
+            next.children[1].style.transform = "translateX(100%)"
+        }
+
+        for (let i = 0; i < dian.children.length; i++) {
+            dian.children[i].onclick = function () {
+                num = i
+                moverul(num)
+                removedian(num)
+            }
+        }
+        next.children[0].onclick = function () {
+            --num
+            if (num < 0) {
+                num = 0
+            }
+            moverul(num)
+            removedian(num)
+        }
+        next.children[1].onclick = function () {
+            ++num
+            if (num > dian.children.length) {
+                num = dian.children.length
+            }
+            moverul(num)
+            removedian(num)
+        }
+    }
+	craousel()
+</script>
+
+</html>
