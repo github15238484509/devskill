@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" id="ExTable">
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        <tr>
+            <td>January</td>
+            <td>$100</td>
+        </tr>
+    </table>
+    <button type="" id="cc">555</button>
+</body>
+<script src="./jquery.min.js"></script>
+<script src="./jquery.table2excel.min.js"></script>
+<script>
+    cc.onclick = function () {
+        $("#ExTable").table2excel({
+            exclude: ".noExl", //过滤位置的 css 类名
+            filename: "Excel" + new Date().getTime() + ".xls", //文件名称
+            name: "Excel Document Name.xlsx",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true
+        });
+    }
+</script>
+
+</html>
