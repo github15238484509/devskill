@@ -1,0 +1,3 @@
+lodop 打印设置
+	http://www.lodop.net/LodopDemo.html  官网
+用法看他的html文件
