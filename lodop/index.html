@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="LodopFuncs.js"></script>
+    <object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+        <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+    </object>
+</head>
+
+<body>
+
+    <button id="preview">预览</button>
+
+    <script>
+     
+        // var LODOP = getLodop();//需要放在函数里面因为他不想占用页面加载
+        var LODOP
+        preview.onclick = function () {
+            prn1_preview()
+        }
+        function prn1_preview() {
+            CreateOneFormPage();
+            LODOP.PREVIEW();
+        };
+
+        function CreateOneFormPage() {
+            LODOP =  getLodop();
+            LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+            LODOP.SET_PRINT_STYLE("FontSize", 20);
+            LODOP.SET_PRINT_STYLE("Bold", 1);
+            LODOP.SET_PRINT_STYLE("color", "red");
+            LODOP.ADD_PRINT_TEXT(0,20, 20, 20, "打印页面部分内容");
+            LODOP.ADD_PRINT_HTM(0, 0, 350, 600, document.getElementById("preview").innerHTML);
+        };
+    </script>
+</body>
+
+</html>
