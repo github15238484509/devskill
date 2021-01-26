@@ -1,3 +1,7 @@
 lodop 打印设置
 	http://www.lodop.net/LodopDemo.html  官网
 用法看他的html文件
+
+
+https://blog.csdn.net/hello_world_qwp/article/details/78125642 详细方法
+https://blog.csdn.net/weixin_37020977/article/details/81604900详细方法
